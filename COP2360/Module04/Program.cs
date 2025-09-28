@@ -19,37 +19,39 @@
 
         catch (FormatException ex)
         {
-            Console.WriteLine("Error: One or both of the inputs are not valid integers");
-            Console.WriteLine($"Detailed error message: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+            ReportError(ex, "Error: One or both of the inputs are not valid integers", input1, input2);
+            //Console.WriteLine($"Detailed error message: {ex.Message}");
+            //Console.WriteLine($"User Input: input1 = '{input1}', input2 = '{input2}'");
+            //Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (DivideByZeroException ex)
         {
-            Console.WriteLine("Error: Division by zero is not allowed.");
-            Console.WriteLine($"Detailed error message: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+            ReportError(ex, "Error: Division by zero is not allowed.");
+            //Console.WriteLine($"Detailed error message: {ex.Message}");
+            //Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (OverflowException ex)
         {
-            Console.WriteLine("Error: Division resulted in a value that is too large to be stored");
-            Console.WriteLine($"Detailed error message: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+            ReportError(ex, "Error: Division resulted in a value that is too large to be stored", input1, input2);
+            //Console.WriteLine($"Detailed error message: {ex.Message}");
+            //Console.WriteLine($"User Input: input1 = '{input1}', input2 = '{input2}'");
+            //Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (ArgumentNullException ex)
         {
-            Console.WriteLine("Error: One of the Inputs was null.");
-            Console.WriteLine($"Detailed error message: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+            ReportError(ex, "Error: One of the Inputs was null.");
+            //Console.WriteLine($"Detailed error message: {ex.Message}");
+            //Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (Exception ex)
         {
-            Console.WriteLine("An unexpected error occurred.");
-            Console.WriteLine($"Detailed error message: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+            ReportError(ex, "An unexpected error occurred.");
+            //Console.WriteLine($"Detailed error message: {ex.Message}");
+            //Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         Console.WriteLine("Press any key to exit...");
@@ -59,5 +61,20 @@
     static int Divide(int a, int b)
     {
         return a / b;
+    }
+
+    static void ReportError(Exception ex, string context, string input1 = null, string input2 = null)
+    {
+
+        Console.WriteLine($"[ERROR] {DateTime.Now}: {context}");
+        Console.WriteLine($"Type: {ex.GetType()}");
+        Console.WriteLine($"Message: {ex.Message}");
+
+        if (ex is FormatException || ex is OverflowException)
+        {
+            Console.WriteLine($"User Input: input1 = '{input1}', input2 = '{input2}'");
+        }
+
+        Console.WriteLine($"Stack Trace: {ex.StackTrace}");
     }
 }
