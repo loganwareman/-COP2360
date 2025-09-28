@@ -60,6 +60,7 @@
 
     static int Divide(int a, int b)
     {
+        //throw new Exception("Custom test exception");
         return a / b;
     }
 
