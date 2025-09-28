@@ -21,24 +21,35 @@
         {
             Console.WriteLine("Error: One or both of the inputs are not valid integers");
             Console.WriteLine($"Detailed error message: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (DivideByZeroException ex)
         {
             Console.WriteLine("Error: Division by zero is not allowed.");
             Console.WriteLine($"Detailed error message: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (OverflowException ex)
         {
             Console.WriteLine("Error: Division resulted in a value that is too large to be stored");
             Console.WriteLine($"Detailed error message: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+        }
+
+        catch (ArgumentNullException ex)
+        {
+            Console.WriteLine("Error: One of the Inputs was null.");
+            Console.WriteLine($"Detailed error message: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         catch (Exception ex)
         {
             Console.WriteLine("An unexpected error occurred.");
             Console.WriteLine($"Detailed error message: {ex.Message}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
 
         Console.WriteLine("Press any key to exit...");
