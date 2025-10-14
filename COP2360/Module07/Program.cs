@@ -45,7 +45,7 @@ class Program
                     PopulateInventory();
                     break;
                 case "b":
-                    //DisplayInventory();
+                    DisplayInventory();
                     break;
                 case "c":
                     //RemoveItem();
@@ -120,7 +120,20 @@ class Program
         Console.WriteLine($"{name} added to inventory.");
     }
 
+    static void DisplayInventory()
+    {
+        if (inventory.Count == 0)
+        {
+            Console.WriteLine("Inventory is empty.");
+            return;
+        }
 
+        Console.WriteLine("\nCurrent Inventory:");
+        foreach (var item in inventory)
+        {
+            Console.WriteLine(item.Value);
+        }
+    }
 
 
 }
