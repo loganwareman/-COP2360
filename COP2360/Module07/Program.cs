@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
-// Inventory dictionary
+
+// Inventory dictionary Item
 public class  Item 
 {
     public string Name { get; set; }
@@ -21,6 +23,7 @@ class Program
 
     static void Main(string[] args)
     {
+        LoadInventory(); // Load inventory from file at the start
 
         bool running = true;
         while (running)
@@ -29,13 +32,20 @@ class Program
             
             //Populates an item within the inventory
             Console.WriteLine("a. Insert Inventory Item");
-            
+
+            //Displays the contents of the inventory
             Console.WriteLine("b. Display Dictionary Contents");
 
+            //Removes an item from the inventory
             Console.WriteLine("c. Remove a Key");
-            
+
+            //Searches for an item in the inventory
+            Console.WriteLine("d. Add a New Key and Value");
+
+            //Saves the inventory to a file and exits the program
             Console.WriteLine("q. Quit");
-            
+
+            //records user input to determine which action to take
             Console.Write("Enter your choice: ");
             string choice = Console.ReadLine().ToLower();
 
@@ -48,9 +58,18 @@ class Program
                     DisplayInventory();
                     break;
                 case "c":
-                    //RemoveItem();
+                    RemoveItem();
                     break;
+                case "d":
+                    AddInventoryItem();
+                    break;
+                case "e":
+                    //AppendValue()
+                    break;
+                case "f":
+                    //SortInventory()
                 case "q":
+                    SaveInventory();
                     running = false;
                     break;
                 default:
@@ -62,8 +81,53 @@ class Program
         
     }
 
-    //Populates the inventory with an item
+    //Saves the inventory to a file
+    static void SaveInventory()
+    {
+        string json = JsonSerializer.Serialize(inventory, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText("inventory.json", json);
+        Console.WriteLine("Inventory saved to file.");
+    }
+
+    //Loads the inventory from a file
+    static void LoadInventory()
+    {
+        if (File.Exists("inventory.json"))
+        {
+            string json = File.ReadAllText("inventory.json");
+            inventory = JsonSerializer.Deserialize<Dictionary<string, Item>>(json) ?? new Dictionary<string, Item>();
+            Console.WriteLine("Inventory loaded from file.");
+        }
+
+        else
+        {
+            Console.WriteLine("No saved inventory file found. Starting with an empty inventory.");
+        }
+    }
+
+    //Populates the inventory with sample items (for testing purposes)
     static void PopulateInventory()
+    {
+        //I ended up really getting stuck on produce items when I was thinking of items to add
+        //I was probably hungry
+        inventory = new Dictionary<string, Item>
+        {
+            { "Apples", new Item { Name = "Apples", Quantity = 100, Price = 0.50m } },
+            { "Bananas", new Item { Name = "Bananas", Quantity = 120, Price = 0.30m } },
+            { "Oranges", new Item { Name = "Oranges", Quantity = 80, Price = 0.60m } },
+            { "Lettuce", new Item { Name = "Lettuce", Quantity = 40, Price = 1.25m } },
+            { "Tomatoes", new Item { Name = "Tomatoes", Quantity = 75, Price = 0.90m } },
+            { "Carrots", new Item { Name = "Carrots", Quantity = 60, Price = 0.40m } },
+            { "Potatoes", new Item { Name = "Potatoes", Quantity = 200, Price = 0.35m } },
+            { "Onions", new Item { Name = "Onions", Quantity = 150, Price = 0.45m } },
+            { "Cucumbers", new Item { Name = "Cucumbers", Quantity = 50, Price = 0.70m } },
+            { "Bell Peppers", new Item { Name = "Bell Peppers", Quantity = 30, Price = 1.10m } }
+        };
+        Console.WriteLine("Inventory populated with sample items.");
+    }
+
+    //Adds a singular inventory item
+    static void AddInventoryItem()
     {
 
         string name = "";
@@ -120,6 +184,7 @@ class Program
         Console.WriteLine($"{name} added to inventory.");
     }
 
+    //Displays the contents of the inventory
     static void DisplayInventory()
     {
         if (inventory.Count == 0)
@@ -135,6 +200,35 @@ class Program
         }
     }
 
+    //Removes an item from the inventory
+    static void RemoveItem()
+    {
+        Console.Write("Enter the item name to remove: ");
+        string name = Console.ReadLine();
 
+        if (inventory.Remove(name))
+        {
+            Console.WriteLine($"{name} was removed from inventory.");
+        }
+        else
+        {
+            Console.WriteLine($"{name} not found in inventory.");
+        }
+    }
+
+    static void AppendInventoryItem()
+    {
+        Console.WriteLine("Yet to be Implemented");
+    }
+
+    static void SortInventory()
+    {
+        Console.WriteLine("Yet to be Implemented");
+    }
 }
-    
+
+
+
+
+
+
