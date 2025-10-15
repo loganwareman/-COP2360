@@ -18,7 +18,7 @@ public class  Item
 
 class Program
 {
-
+    //Inventory dictionary
     static Dictionary<string, Item> inventory = new Dictionary<string, Item>();
 
     static void Main(string[] args)
@@ -42,6 +42,12 @@ class Program
             //Searches for an item in the inventory
             Console.WriteLine("d. Add a New Key and Value");
 
+            //Appends a value to an existing key
+            Console.WriteLine("e. Append a Value to an Existing Key");
+
+            //Sorts the inventory by key
+            Console.WriteLine("f. Sort Inventory by Key");
+
             //Saves the inventory to a file and exits the program
             Console.WriteLine("q. Quit");
 
@@ -64,10 +70,11 @@ class Program
                     AddInventoryItem();
                     break;
                 case "e":
-                    //AppendValue()
+                    AppendInventoryItem();
                     break;
                 case "f":
-                    //SortInventory()
+                    SortInventory();
+                    break;
                 case "q":
                     SaveInventory();
                     running = false;
@@ -216,11 +223,13 @@ class Program
         }
     }
 
+    //Appends a value to an existing key
     static void AppendInventoryItem()
     {
         Console.WriteLine("Yet to be Implemented");
     }
 
+    //Sorts the inventory by key
     static void SortInventory()
     {
         Console.WriteLine("Yet to be Implemented");
