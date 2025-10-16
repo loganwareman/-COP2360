@@ -48,8 +48,13 @@ class Program
             //Sorts the inventory by key
             Console.WriteLine("f. Sort Inventory by Key");
 
+            //Removes all items from the inventory (JESUS'S CODE)
+            Console.WriteLine("g. Remove ALL items");
+
             //Saves the inventory to a file and exits the program
             Console.WriteLine("q. Quit");
+
+          
 
             //records user input to determine which action to take
             Console.Write("Enter your choice: ");
@@ -74,6 +79,10 @@ class Program
                     break;
                 case "f":
                     SortInventory();
+                    break;
+                //JESUS'S CODE
+                case "g":
+                    ClearAllItems();
                     break;
                 case "q":
                     SaveInventory();
@@ -222,6 +231,14 @@ class Program
             Console.WriteLine($"{name} not found in inventory.");
         }
     }
+
+    //Removes ALL items from the inventory (JESUS'S CODE)
+    static void ClearAllItems()
+    {
+        inventory.Clear();
+        Console.WriteLine("All inventory items have been removed.");
+    }
+
 
     //Appends a value to an existing key
     static void AppendInventoryItem()
