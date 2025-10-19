@@ -18,7 +18,7 @@ public class  Item
 
 class Program
 {
-    //Inventory dictionary (Logan's code)
+    //Inventory dictionary (Tyler's code)
     static Dictionary<string, Item> inventory = new Dictionary<string, Item>();
 
     static void Main(string[] args)
@@ -299,10 +299,53 @@ class Program
         }
     }
 
-    //Sorts the inventory by key (Jayzalee's CODE)
+    //Sorts the inventory by key (Jayzalee CODE)
     static void SortInventory()
     {
-        Console.WriteLine("Yet to be Implemented");
+        if (inventory.Count == 0)
+        {
+            Console.WriteLine("Inventory is empty. Nothing to sort.");
+            return;
+        }
+
+        Console.WriteLine("\nSort Inventory By:");
+        Console.WriteLine("1. Item Name");
+        Console.WriteLine("2. Quantity");
+        Console.WriteLine("3. Price");
+        Console.Write("Enter your choice (1-3): ");
+        string sortChoice = Console.ReadLine();
+
+        Console.WriteLine("\n📦 Sorted Inventory:");
+
+        switch (sortChoice)
+        {
+            case "1":
+                foreach (var entry in inventory.OrderBy(item => item.Key))
+                {
+                    Console.WriteLine($"{entry.Key}: {entry.Value}");
+                }
+                break;
+
+            case "2":
+                foreach (var entry in inventory.OrderBy(item => item.Value.Quantity))
+                {
+                    Console.WriteLine($"{entry.Key}: {entry.Value}");
+                }
+                break;
+
+            case "3":
+                foreach (var entry in inventory.OrderBy(item => item.Value.Price))
+                {
+                    Console.WriteLine($"{entry.Key}: {entry.Value}");
+                }
+                break;
+
+            default:
+                Console.WriteLine("Invalid choice. Sorting canceled.");
+                break;
+        }
+
+
     }
 }
 
