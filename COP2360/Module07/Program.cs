@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 
 
-// Inventory dictionary Item
+// Inventory dictionary Item (Logan's code)
 public class  Item 
 {
     public string Name { get; set; }
@@ -18,7 +18,7 @@ public class  Item
 
 class Program
 {
-    //Inventory dictionary
+    //Inventory dictionary (Logan's code)
     static Dictionary<string, Item> inventory = new Dictionary<string, Item>();
 
     static void Main(string[] args)
@@ -31,7 +31,7 @@ class Program
             Console.WriteLine("\nInventory Menu:");
             
             //Populates an item within the inventory
-            Console.WriteLine("a. Insert Inventory Item");
+            Console.WriteLine("a. Populate Inventory with Basic Items");
 
             //Displays the contents of the inventory
             Console.WriteLine("b. Display Dictionary Contents");
@@ -62,18 +62,23 @@ class Program
 
             switch (choice)
             {
+                //Logan'S CODE
                 case "a":
                     PopulateInventory();
                     break;
+                //Tyler's CODE
                 case "b":
                     DisplayInventory();
                     break;
+                //Tyler's CODE
                 case "c":
                     RemoveItem();
                     break;
+                //Logan's CODE
                 case "d":
                     AddInventoryItem();
                     break;
+                //LJ's CODE
                 case "e":
                     AppendInventoryItem();
                     break;
@@ -200,7 +205,7 @@ class Program
         Console.WriteLine($"{name} added to inventory.");
     }
 
-    //Displays the contents of the inventory
+    //Displays the contents of the inventory (Tyler's code)
     static void DisplayInventory()
     {
         if (inventory.Count == 0)
@@ -216,7 +221,7 @@ class Program
         }
     }
 
-    //Removes an item from the inventory
+    //Removes an item from the inventory (Tyler's code)
     static void RemoveItem()
     {
         Console.Write("Enter the item name to remove: ");
@@ -240,13 +245,60 @@ class Program
     }
 
 
-    //Appends a value to an existing key
+    //Appends a value to an existing key (LJ's CODE)
     static void AppendInventoryItem()
     {
-        Console.WriteLine("Yet to be Implemented");
+        {
+            Console.Write("Enter the item name to append: ");
+            string name = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("Item name cannot be empty.");
+                return;
+            }
+
+            if (inventory.ContainsKey(name))
+            {
+                try
+                {
+                    Console.Write("Enter new quantity: ");
+                    string quantityInput = Console.ReadLine();
+                    if (!int.TryParse(quantityInput, out int addQuantity) || addQuantity < 0)
+                    {
+                        Console.WriteLine("Invalid quantity. Please enter a non-negative number.");
+                        return;
+                    }
+
+                    Console.Write("Enter new price for the item: ");
+                    string priceInput = Console.ReadLine();
+                    if (!decimal.TryParse(priceInput, out decimal newPrice) || newPrice < 0)
+                    {
+                        Console.WriteLine("Invalid price. Please enter a valid positive decimal value.");
+                        return;
+                    }
+
+                    inventory[name].Quantity = addQuantity;
+                    inventory[name].Price = newPrice;
+
+                    Console.WriteLine($"✅ {name} updated successfully!");
+                    Console.WriteLine($"New Quantity: {inventory[name].Quantity}");
+                    Console.WriteLine($"New Price: {inventory[name].Price:C}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while updating: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"❌ Item '{name}' not found in inventory.");
+            }
+
+        }
     }
 
-    //Sorts the inventory by key
+    //Sorts the inventory by key (Jayzalee's CODE)
     static void SortInventory()
     {
         Console.WriteLine("Yet to be Implemented");
