@@ -89,6 +89,7 @@ class Program
                 case "g":
                     ClearAllItems();
                     break;
+                //Logan's CODE
                 case "q":
                     SaveInventory();
                     running = false;
